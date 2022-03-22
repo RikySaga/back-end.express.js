@@ -25,4 +25,4 @@ module.exports = app => {
     router.delete("/", posts.deleteAll);
 
     app.use("/api/posts", router);
-}
+};
