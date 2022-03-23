@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 
 // Models
-const db = require("./app/models");
+const db = require("./models");
 
 const app = express();
 
@@ -35,7 +35,7 @@ app.get("/", (req, res) => {
 });
 
 // Posts Routes
-require("./app/routes/post.routes")(app);
+require("./routes/tutorial.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
