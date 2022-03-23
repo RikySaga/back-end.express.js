@@ -1,5 +1,5 @@
 {
-    "name": "latihan-exspress",
+    "name": "express-js",
     "version": "1.0.0",
     "description": "",
     "main": "server.js",
@@ -9,7 +9,6 @@
     "keywords": [
         "node.js",
         "express",
-        "mysql",
         "sequelize"
     ],
     "author": "",
