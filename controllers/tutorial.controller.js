@@ -1,11 +1,12 @@
 const db = require("../models");
-const Tutorial = db.tutorials;
+const Tutorial = db.User;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new Tutorial
 exports.create = (req, res) => {
     // Validate request
-    if (!req.body.title) {
+    console.log(req.body);
+    if (!req.body.firstName) {
         res.status(400).send({
             message: "Content can not be empty!"
         });
@@ -14,15 +15,17 @@ exports.create = (req, res) => {
 
     // Create a Tutorial
     const tutorial = {
-        title: req.body.title,
-        description: req.body.description,
-        published: req.body.published ? req.body.published : false
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email ? req.body.email : false
     };
 
     // Save Tutorial in the database
     Tutorial.create(tutorial)
         .then(data => {
+
             res.send(data);
+
         })
         .catch(err => {
             res.status(500).send({
@@ -33,19 +36,17 @@ exports.create = (req, res) => {
 
 // Retrieve all Tutorials from the database.
 exports.findAll = (req, res) => {
-    const title = req.query.title;
-    var condition = title ? {
-        title: {
-            [Op.iLike]: `%${title}%`
-        }
-    } : null;
-    Tutorial.findAll({ where: condition })
+    console.log("this is tutor", Tutorial);
+
+
+    Tutorial.findAll()
         .then(data => {
+            console.log(data);
             res.send(data);
         })
         .catch(err => {
             res.status(500).send({
-                message: err.message || "Some error occurred while retrieving tutorials."
+                message: err.message + "error findall" || "Some error occurred while retrieving tutorials."
             });
         });
 };
@@ -53,7 +54,7 @@ exports.findAll = (req, res) => {
 // Find a single Tutorial with an id
 exports.findOne = (req, res) => {
     const id = req.params.id;
-    Tutorial.findByPk(id)
+    Tutorial.findOne(id)
         .then(data => {
             res.send(data);
         })
@@ -128,7 +129,7 @@ exports.deleteAll = (req, res) => {
 };
 // Find all published Tutorials
 exports.findAllPublished = (req, res) => {
-    Tutorial.findAll({ where: { published: true } })
+    Tutorial.findAll({ where: { email: true } })
         .then(data => {
             res.send(data);
         })

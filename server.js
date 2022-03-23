@@ -21,7 +21,7 @@ let corsOptions = {
 app.use(cors(corsOptions));
 
 // parse requests of content-type - application/json
-app.use(bodyParser.json());
+app.use(express.json());
 
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
