@@ -1,10 +1,9 @@
 {
     "development": {
-        "username": "sql6481180",
-        "password": "bVzvb9nWAI",
-        "database": "sql6481180",
-        "host": "sql6.freemysqlhosting.net",
-        "port": "3306",
+        "username": "root",
+        "password": "",
+        "database": "node_mysql",
+        "host": "localhost",
         "dialect": "mysql"
     },
     "test": {
