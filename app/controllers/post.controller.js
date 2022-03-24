@@ -9,7 +9,7 @@ exports.create = (req, res) => {
         res.status(400).send({
             message: "Content can not be empty!"
         });
-        return;
+        return ;
     }
 
     // Create a Post
@@ -25,7 +25,8 @@ exports.create = (req, res) => {
             res.send(data);
         }).catch((err) => {
             res.status(500).send({
-                message: err.message || "Some error occurred while creating the Post."
+                message:
+                    err.message || "Some error occurred while creating the Post."
             })
         });
 };
@@ -33,15 +34,15 @@ exports.create = (req, res) => {
 // Retrieve all Posts from the database.
 exports.findAll = (req, res) => {
     const title = req.query.title;
-    let condition = title ? { title: {
-            [Op.like]: `%${title}%` } } : null;
+    let condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
 
     Post.findAll({ where: condition })
         .then((data) => {
             res.send(data);
         }).catch((err) => {
             res.status(500).send({
-                message: err.message || "Some error occured while find post"
+                message:
+                    err.message || "Some error occured while find post"
             });
         });
 };
@@ -67,7 +68,7 @@ exports.update = (req, res) => {
     Post.update(req.body, {
         where: { id: id }
     }).then((result) => {
-        if (result == 1) {
+        if ( result == 1 ) {
             res.send({
                 message: "Post was updated successfully"
             });
@@ -117,7 +118,8 @@ exports.deleteAll = (req, res) => {
         });
     }).catch((err) => {
         res.status(500).send({
-            message: err.message || "Some error occurred while removing all posts."
+            message: 
+                err.message || "Some error occurred while removing all posts."
         });
     });
 
@@ -131,7 +133,8 @@ exports.findAllPublished = (req, res) => {
         res.send(result);
     }).catch((err) => {
         res.status(500).send({
-            message: err.message || "Some error occured retrieving posts"
+            message:
+                err.message || "Some error occured retrieving posts"
         })
     });
 };
