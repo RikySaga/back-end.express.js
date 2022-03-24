@@ -1,7 +1,5 @@
 module.exports = {
-    /*
-    * First five parameters are for MySQL connection.
-    */
+
     HOST: "localhost",
     USER: "root",
     PASSWORD: "",
