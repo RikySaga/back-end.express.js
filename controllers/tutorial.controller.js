@@ -41,7 +41,6 @@ exports.findAll = (req, res) => {
 
     Tutorial.findAll()
         .then(data => {
-            console.log(data);
             res.send(data);
         })
         .catch(err => {
