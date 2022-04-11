@@ -9,7 +9,7 @@ const app = express();
 
 let whiteList = ['http://localhost:8081'];
 let corsOptions = {
-    origin: function (origin, callback) {
+    origin: function(origin, callback) {
         if (whiteList.indexOf(origin) !== -1 || !origin) {
             callback(null, true)
         } else {
@@ -27,7 +27,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Sync database
-db.sequelize.sync();
+// db.sequelize.sync();
 
 // simple route
 app.get("/", (req, res) => {
