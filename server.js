@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const paginate = require('express-paginate');
 
 // Models
 const db = require("./app/models");
@@ -30,9 +31,30 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // db.sequelize.sync();
 
 // simple route
-app.get("/", (req, res) => {
-    res.json({ message: "Welcome to IDStack REST API." });
+// app.get("/", (req, res) => {
+//     res.json({ message: "Welcome to IDStack REST API." });
+// });
+
+app.use(paginate.middleware(2, 4));
+
+app.get('/users', async(req, res, next) => {
+
+    router.get("/posts", (req, res, next) => {
+        db.User.findAndCountAll({ limit: req.query.limit, offset: req.skip })
+            .then(results => {
+                const itemCount = results.count;
+                const pageCount = Math.ceil(results.count / req.query.limit);
+                res.render('posts', {
+                    posts: results.rows,
+                    pageCount,
+                    itemCount,
+                    pages: paginate.getArrayPages(req)(3, pageCount, req.query.page)
+                });
+            }).catch(err => next(err))
+    });
+
 });
+
 
 // Posts Routes
 require("./app/routes/post.routes")(app);
